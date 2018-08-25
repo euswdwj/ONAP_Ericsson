@@ -1,0 +1,24 @@
+---
+- name: Download kubectl
+  become: yes
+  become_user: root
+  get_url:
+    url: https://storage.googleapis.com/kubernetes-release/release/v{{ kubectl_ver }}/bin/linux/amd64/kubectl
+    dest: /usr/local/bin/kubectl
+    mode: 0755
+ 
+- name: Create kube directory
+  become: yes
+  become_user: root
+  file:
+    path: ~/.kube
+    state: directory
+    mode: 0755
+
+- name: Copy config file
+  become: yes
+  become_user: root
+  copy:
+    src: /tmp/kube_config
+    dest: ~/.kube/config
+    mode: 0755
