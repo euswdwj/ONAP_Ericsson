@@ -54,5 +54,3 @@
   wait_for: timeout=60
   delegate_to: localhost
 
-- name: Initialize Tiller
-  shell: helm init

@@ -5,60 +5,63 @@
     state: directory
     mode: "u=rwx,g=wx,o=rwx"
 
-- name: Configuring RBACK for Tiller Deployment
-  shell: kubectl create -f /home/ubuntu/ONAP_LAB/deploy/roles/k8s/tiller-serviceaccount.yaml
 
 - name: Initialize Tiller
-  shell: helm init --service-account tiller --upgrade
+  shell: helm init
 
 - name: sleep for 90 seconds and continue with play
   wait_for: timeout=180
   delegate_to: localhost
 
-#- name: Collect Helm Charts
-#  become: yes
-#  git:
- #   repo: https://git.onap.org/oom/
-#    version: 2.0.0-ONAP
-#    dest: /mnt/srv/oom
-#    clone: yes
+- name: Collect Helm Charts
+  become: yes
+  git:
+    repo: https://gerrit.onap.org/r/p/oom.git
+    version: 2.0.0-ONAP
+    dest: /home/ubuntu
+    clone: yes
 
-#- name: Start Helm Server
-#  shell: sudo helm serve >/dev/null 2>&1 &
+- name: Log into Docker registry
+  docker_login:
+    registry: nexus3.onap.org:10001
+    username: docker
+    password: docker
+    reauthorize: yes
 
-#- name: Add local Helm Repo for Charts
-#  shell: sudo helm repo add local http://127.0.0.1:8879
+- name: Start Helm Server
+  shell: sudo helm serve >/dev/null 2>&1 &
 
-#- name: Remove Default Helm Repo
-#  shell: sudo helm repo remove stable
+- name: Add local Helm Repo for Charts
+  shell: sudo helm repo add local http://127.0.0.1:8879
 
-#- name: Helm List Repo
-#  shell: sudo helm repo list
+- name: Remove Default Helm Repo
+  shell: sudo helm repo remove stable
 
-#- name: Install demo template
- # become: yes
- # template:
-  #    src: "{{ config }}"
-  #    dest: /mnt/srv/oom/kubernetes/onap/values.yaml
+- name: Helm List Repo
+  shell: sudo helm repo list
 
-#- name: Ingest Charts to the Helm Local Repo
-#  command: sudo make all
-#  args:
-#    chdir: /mnt/srv/oom/kubernetes
+- name: Install demo template
+  become: yes
+  copy:
+    src: values.yaml
+    dest: /home/ubuntu/oom/kubernetes/onap/values.yaml
 
-#- name: Creates dockerdata-nfs
-#  file: 
- #   path: /mnt/dockerdata-nfs 
-  #  state: directory
-  #  mode: "u=rwx,g=wx,o=rwx"
+- name: Install robot demo template
+  become: yes
+  copy:
+    src: robot_values.yaml
+    dest: /home/ubuntu/oom/kubernetes/robot/values.yaml
 
-##- name: Install The Helm Repo - Not current available
-##  shell: helm install osn/onap
+- name: Ingest Charts to the Helm Local Repo
+  command: sudo make all
+  args:
+    chdir: /home/ubuntu/oom/kubernetes
 
-#- name: sleep for 180 seconds before continue with ONAP Deployment
-#  wait_for: timeout=180
- # delegate_to: localhost
 
-#- name: Deploying ONAP Helm
-#  shell: sudo helm install local/onap -n dev --namespace onap 
+- name: sleep for 180 seconds before continue with ONAP Deployment
+  wait_for: timeout=180
+  delegate_to: localhost
+
+- name: Deploying ONAP Helm
+  shell: sudo helm install local/onap -n onap --namespace onap 
 
