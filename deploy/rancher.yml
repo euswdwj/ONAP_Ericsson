@@ -1,9 +1,6 @@
 ---
 - hosts: localhost
   gather_facts: no
-  pre_tasks:
-    - name: install python
-      raw: sudo apt-get install -y python-minimal
   roles:
       - common 
       - docker
