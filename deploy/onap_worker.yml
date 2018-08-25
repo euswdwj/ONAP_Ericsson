@@ -7,6 +7,6 @@
   roles:
       - common 
       - docker
-      - k8s
+      - kubectl
       - helm
-      - tiller
+ #     - tiller
