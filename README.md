@@ -35,7 +35,7 @@ pip install python-novaclient
    31  sudo pip install python-heatclient
    
 Clone the git:
-(no sudo) git clone https://github.com/lmcfala/ONAP_LAB.git 
+(no sudo) git clone https://github.com/onap-ericsson/ONAP_Ericsson.git 
 
 From Horizon GUI source the scripts. 
 nova list
@@ -54,17 +54,17 @@ Source your authentication credentials:
 Deploy:
 1) Minimal OOM overriding default templates such as OOMTemplate
 
-	$ openstack stack create -t deploy/oom_onap.yaml --parameter "AnsibleRepository=https://github.com/lmcfala/ONAP_LAB.git" --parameter "AnsiblePlaybook=deploy/site.yaml" --parameter "OOMTemplate=minimal.cfg.j2" ONAP-stack
+	$ openstack stack create -t deploy/oom_onap.yaml --parameter "AnsibleRepository=https://github.com/onap-ericsson/ONAP_Ericsson.git" --parameter "AnsiblePlaybook=deploy/site.yaml" --parameter "OOMTemplate=minimal.cfg.j2" ONAP-stack
 
 2) Production OOM overriding default templates, lsuch as VM Flavor
 
-	$ openstack stack create -t deploy/oom_onap.yaml --parameter "AnsibleRepository=https://github.com/lmcfala/ONAP_LAB.git" --parameter "AnsiblePlaybook=deploy/site.yaml" --parameter "OOMTemplate=prod.cfg.j2" --parameter "flavor=ONAP_eSON" ONAP-stack
+	$ openstack stack create -t deploy/oom_onap.yaml --parameter "AnsibleRepository=https://github.com/onap-ericsson/ONAP_Ericsson.git" --parameter "AnsiblePlaybook=deploy/site.yaml" --parameter "OOMTemplate=prod.cfg.j2" --parameter "flavor=ONAP_eSON" ONAP-stack
 
 You can replace the following default settings:
 
 	KeyName": "ONAP"
 	
-	AnsibleRepository": https://github.com/lmcfala/ONAP_LAB.git"
+	AnsibleRepository": https://github.com/onap-ericsson/ONAP_Ericsson.git"
 	
 	AnsiblePlaybook: "deploy/site.yaml" 
   
@@ -98,9 +98,14 @@ You can access by
 
 	ssh ubuntu@<instance IP>
 
-Execute Script:
+Execute below command to setup Rancher node:
 
-	./runme.sh
+	sudo ansible-pull -U https://github.com/onap-ericsson/ONAP_Ericsson.git -e deploy/rancher.yml -vvv
+	
+Execute below command to setup ONAP Worker node ( repeat same command on other ONAP cluster node ):
+
+	sudo ansible-pull -U https://github.com/onap-ericsson/ONAP_Ericsson.git -e deploy/onap_worker.yml -vvv
+
 
 Wait for the script to complete.
 
