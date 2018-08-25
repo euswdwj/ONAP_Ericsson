@@ -5,8 +5,8 @@
     - name: install python
       raw: sudo apt-get install -y python-minimal
   roles:
-      - common 
-      - docker
-      - kubectl
-      - helm
- #     - tiller
+#      - common 
+#      - docker
+#      - kubectl
+#      - helm
+      - tiller
