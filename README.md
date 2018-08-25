@@ -104,7 +104,7 @@ Execute below command to setup Rancher node:
 
 Execute below steps to create hosts using Rancher GUI:
        
-     1. On Rancher web interface create a host in Kubernetes environment --> copy script to clipboard
+    1. On Rancher web interface create a host in Kubernetes environment --> copy script to clipboard
 	2. Run Kubernetes host sudo script on K8 instance
 	3. K8 is installed by Rancher. See host progress in Rancher - INFRASTRUCTURE - Hosts.
 	4. Monitor install progress by clicking on Kubernetes menu option. When you see >_CLI the K8 master is up
