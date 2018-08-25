@@ -15,10 +15,10 @@
     state: directory
     mode: 0755
 
-- name: Copy config file
-  become: yes
-  become_user: root
-  copy:
-    src: /tmp/kube_config
-    dest: ~/.kube/config
-    mode: 0755
+#- name: Copy config file
+#  become: yes
+#  become_user: root
+#  copy:
+##    src: /tmp/kube_config
+ #   dest: ~/.kube/config
+ #   mode: 0755
