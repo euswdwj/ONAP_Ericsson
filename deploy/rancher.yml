@@ -8,3 +8,5 @@
       - common 
       - docker
       - rancher
+      - kubectl
+      - helm
