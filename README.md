@@ -113,14 +113,7 @@ Execute below command to setup ONAP Worker node ( repeat same command on other O
 
 	sudo ansible-pull -U https://github.com/onap-ericsson/ONAP_Ericsson.git -e deploy/onap_worker.yml -vvv
 
-
 Wait for the script to complete.
-
-You could verify your deployment by (Please note it may take from 15 ~ 30 mins with minimal deployment depending on your compute resources ) :
-
-	helm list
-	                                                                            
-	helm status dev
 
 It shows the status of the charts and associated Pods and Containers
 
