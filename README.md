@@ -194,6 +194,10 @@ It shows the status of the charts and associated Pods and Containers
 
 It shows the status of Pods and Containers at Kubernetes level.
 
+Execute below command to setup onap on ANY ONE OF THE K8S node:
+
+	sudo ansible-pull -U https://github.com/onap-ericsson/ONAP_Ericsson.git deploy/onap.yml -vvv
+
 ## To Remove
 
 	openstack stack delete ONAP-stack --y
