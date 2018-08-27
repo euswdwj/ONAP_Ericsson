@@ -1,11 +1,11 @@
 heat_template_version: 2013-05-23
 
-description:  OOM Template 
+description:  OOM Template
 
 parameters:
   key_name:
     type: string
-    default: ONAP
+    default: onap-rancher
     description: You own existing key pair to use for the instance
   flavor:
     type: string
@@ -24,21 +24,21 @@ parameters:
     description: (existing) network for the server to be created
     default: ONAP_ProvNet_1
     constraints:
-  AnsibleRepository:
-    type: string
-    label: Ansible_Repository
-    description: Ansible Repository for playbooks and roles.
-    default: https://github.com/moffzilla/ONAP_LAB.git
-  AnsiblePlaybook:
-    type: string
-    label: Ansible_Playbook
-    description: Ansible Playbook Startup.
-    default: deploy/site.yaml
-  OOMTemplate:
-    type: string
-    label: OOM_Template
-    description: OOM Size to deploy.
-    default: minimal.cfg.j2
+#  AnsibleRepository:
+#    type: string
+#    label: Ansible_Repository
+#    description: Ansible Repository for playbooks and roles.
+#    default: https://github.com/moffzilla/ONAP_LAB.git
+#  AnsiblePlaybook:
+#    type: string
+#    label: Ansible_Playbook
+#    description: Ansible Playbook Startup.
+#    default: deploy/site.yaml
+#  OOMTemplate:
+#    type: string
+#    label: OOM_Template
+#    description: OOM Size to deploy.
+#    default: minimal.cfg.j2
   PROXY_LAB:
     type: string
     label: HTTP_PROXY
@@ -48,12 +48,12 @@ parameters:
     type: string
     label: DNS_LAB
     description: Provide your primary DNS.
-    default: 10.7.0.140      
+    default: 10.7.0.140
   DNS_SEARCH:
     type: string
     label: DNS_SEARCH
     description: Provide your default DNS Search Domain.
-    default: bete.ericy.com 
+    default: bete.ericy.com
 
 
 resources:
@@ -82,16 +82,16 @@ resources:
       user_data:
         str_replace:
           params:
-            __AnsibleRepository__: { get_param: AnsibleRepository }
-            __AnsiblePlaybook__: { get_param: AnsiblePlaybook }
-            __OOMTemplate__: { get_param: OOMTemplate }
+  #          __AnsibleRepository__: { get_param: AnsibleRepository }
+  #          __AnsiblePlaybook__: { get_param: AnsiblePlaybook }
+  #          __OOMTemplate__: { get_param: OOMTemplate }
             __PROXY_LAB__: { get_param: PROXY_LAB }
             __DNS_LAB__: { get_param: DNS_LAB }
-            __DNS_SEARCH__: { get_param: DNS_SEARCH }            
+            __DNS_SEARCH__: { get_param: DNS_SEARCH }
           template: |
             #!/bin/bash -ex
             sudo sh -c 'echo search __DNS_SEARCH__ >> /etc/resolv.conf'
-            sudo sh -c 'echo nameserver __DNS_LAB__ >> /etc/resolv.conf'            
+            sudo sh -c 'echo nameserver __DNS_LAB__ >> /etc/resolv.conf'
             export http_proxy=__PROXY_LAB__
             export https_proxy=__PROXY_LAB__
             #export no_proxy="localhost,127.0.0.1,localaddress,.localdomain.com"
@@ -107,13 +107,13 @@ resources:
             #sudo myhostname=oom
             #sudo sh -c 'echo $myIP $myhostname >> /etc/hosts'
             # Clone Main Repository
-            git clone __AnsibleRepository__ /home/ubuntu/ONAP_LAB
-            sudo chown ubuntu:ubuntu /home/ubuntu/ONAP_LAB
-            # Set up proxies for APT            
-            sudo cp /home/ubuntu/ONAP_LAB/deploy/95proxies /etc/apt/apt.conf.d/95proxies
-            sudo chmod 644 /etc/apt/apt.conf.d/95proxies           
+            git clone https://github.com/onap-ericsson/ONAP_Ericsson /home/ubuntu/ONAP_Ericsson
+            sudo chown ubuntu:ubuntu /home/ubuntu/ONAP_Ericsson
+            # Set up proxies for APT
+            sudo cp /home/ubuntu/ONAP_Ericsson/deploy/95proxies /etc/apt/apt.conf.d/95proxies
+            sudo chmod 644 /etc/apt/apt.conf.d/95proxies
             # install dependencies
-            sudo apt-add-repository ppa:ansible/ansible -y 
+            sudo apt-add-repository ppa:ansible/ansible -y
             sudo apt-get update -y
             sudo apt-get install -y ansible git
             # Configure Ansible
@@ -122,11 +122,11 @@ resources:
             #sudo sh -c 'echo "log_path = /var/log/ansible.log" >> /etc/ansible/ansible.cfg'
 
             # Launch Installer
-            echo "#!/bin/bash -ex" >> /home/ubuntu/runme.sh
-            echo "sudo ansible-pull -U __AnsibleRepository__ -e config=__OOMTemplate__ __AnsiblePlaybook__ -vvvv" >> /home/ubuntu/runme.sh
-            sudo chmod 777 /home/ubuntu/runme.sh && sudo chown ubuntu:ubuntu /home/ubuntu/runme.sh
+            #echo "#!/bin/bash -ex" >> /home/ubuntu/runme.sh
+            #echo "sudo ansible-pull -U __AnsibleRepository__ -e config=__OOMTemplate__ __AnsiblePlaybook__ -vvvv" >> /home/ubuntu/runme.sh
+            #sudo chmod 777 /home/ubuntu/runme.sh && sudo chown ubuntu:ubuntu /home/ubuntu/runme.sh
             #sudo sh -c '/home/ubuntu/runme.sh'
-            #sudo ansible-pull -U __AnsibleRepository__ -e config=__OOMTemplate__ __AnsiblePlaybook__ -vvvv 
+            #sudo ansible-pull -U __AnsibleRepository__ -e config=__OOMTemplate__ __AnsiblePlaybook__ -vvvv
             #sudo ansible-pull -U https://github.com/moffzilla/ONAP_LAB.git -e config=minimal.cfg.j2 deploy/site.yaml -vvvv
             # /var/log/cloud-init-output.log
             # /var/lib/heat-cfntools/cfn-userdata
