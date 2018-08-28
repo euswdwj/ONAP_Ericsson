@@ -57,11 +57,11 @@ Create VM's on Openstack using below commands
 
 1) Rancher ( Master node )
 
-	$ openstack stack create -t deploy/oom_onap.yaml  --parameter "flavor=linux-medium" Rancher
+	    $ openstack stack create -t deploy/oom_onap.yaml  --parameter "flavor=linux-medium" Rancher
 
 2) ONAP Cluster node 
 
-	$ openstack stack create -t deploy/oom_onap.yaml  --parameter "flavor=ONAP_Client" Rancher
+	    $ openstack stack create -t deploy/oom_onap.yaml  --parameter "flavor=ONAP_Client" ONAP-Stack
 
   
 You can also create the stack at the Horizon Dashboard
