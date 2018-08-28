@@ -52,23 +52,17 @@ Execute:
 Source your authentication credentials:
 
 Deploy:
-1) Minimal OOM overriding default templates such as OOMTemplate
 
-	$ openstack stack create -t deploy/oom_onap.yaml --parameter "AnsibleRepository=https://github.com/onap-ericsson/ONAP_Ericsson.git" --parameter "AnsiblePlaybook=deploy/site.yaml" --parameter "OOMTemplate=minimal.cfg.j2" ONAP-stack
+Create VM's on Openstack using below commands 
 
-2) Production OOM overriding default templates, lsuch as VM Flavor
+1) Rancher ( Master node )
 
-	$ openstack stack create -t deploy/oom_onap.yaml --parameter "AnsibleRepository=https://github.com/onap-ericsson/ONAP_Ericsson.git" --parameter "AnsiblePlaybook=deploy/site.yaml" --parameter "OOMTemplate=prod.cfg.j2" --parameter "flavor=ONAP_eSON" ONAP-stack
+	$ openstack stack create -t deploy/oom_onap.yaml  --parameter "flavor=linux-medium" Rancher
 
-You can replace the following default settings:
+2) ONAP Cluster node 
 
-	KeyName": "ONAP"
-	
-	AnsibleRepository": https://github.com/onap-ericsson/ONAP_Ericsson.git"
-	
-	AnsiblePlaybook: "deploy/site.yaml" 
-  
-    OOMTemplate: "minimal.cfg.j2"
+	$ openstack stack create -t deploy/oom_onap.yaml  --parameter "flavor=ONAP_Client" Rancher
+
   
 You can also create the stack at the Horizon Dashboard
 
