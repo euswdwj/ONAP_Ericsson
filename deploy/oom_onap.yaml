@@ -58,13 +58,13 @@ parameters:
 
 resources:
 
-  onap_security_group:
-    type: OS::Neutron::SecurityGroup
-    properties:
-      name: onap_security_group
-      rules:
-        - protocol: tcp
-        - protocol: icmp
+#  onap_security_group:
+#    type: OS::Neutron::SecurityGroup
+#    properties:
+#      name: onap_security_group
+#      rules:
+#        - protocol: tcp
+#        - protocol: icmp
 
   my_onap:
     type: OS::Nova::Server
@@ -75,8 +75,8 @@ resources:
       key_name: { get_param: key_name }
       config_drive: 'True'
 #      block_device_mapping: [{volume_id: { get_param: fsb2_cinder_vol }, device_name: vda}]
-      security_groups:
-        - { get_resource: onap_security_group }
+ #     security_groups:
+ #       - { get_resource: onap_security_group }
       networks:
         - network: {get_param: net1}
       user_data:
