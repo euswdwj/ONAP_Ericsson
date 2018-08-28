@@ -48,8 +48,9 @@ Source your authentication credentials:
 Execute:
 
 	$ source keystonerc
-  	$ cd ONAP_LAB/
-Source your authentication credentials:
+	$ git clone https://github.com/onap-ericsson/ONAP_Ericsson.git
+  	$ cd ONAP_Ericsson/
+	
 
 Deploy:
 
