@@ -9,7 +9,7 @@
 - name: Initialize Tiller
   shell: helm init
 
-- name: sleep for 90 seconds and continue with play
+- name: sleep for 30 seconds and continue with play
   wait_for: timeout=180
   delegate_to: localhost
 
@@ -18,7 +18,7 @@
   git:
     repo: https://gerrit.onap.org/r/p/oom.git
     version: 2.0.0-ONAP
-    dest: /home/ubuntu
+    dest: /home/ubuntu/oom
     clone: yes
 
 - name: Log into Docker registry
