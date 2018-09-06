@@ -98,17 +98,6 @@ Execute below command to setup Rancher node:
 	sudo ansible-pull -U https://github.com/onap-ericsson/ONAP_Ericsson.git deploy/rancher.yml -vvv
 
 Execute below steps to create hosts using Rancher GUI:
-       
-    1. On Rancher web interface create a host in Kubernetes environment --> copy script to clipboard
-	2. Run Kubernetes host sudo script on K8 instance
-	3. K8 is installed by Rancher. See host progress in Rancher - INFRASTRUCTURE - Hosts.
-	4. Monitor install progress by clicking on Kubernetes menu option. When you see >_CLI the K8 master is up
-
-Execute below command to setup ONAP Worker node ( repeat same command on other ONAP cluster node ):
-
-	sudo ansible-pull -U https://github.com/onap-ericsson/ONAP_Ericsson.git  deploy/onap_worker.yml -vvv
-
-Wait for the script to complete.
 
 Access Rancher server via web browser
 	
@@ -118,6 +107,20 @@ Access Rancher server via web browser
 	Select the Kubernetes template
 	Click “create”
 	Select the new named environment (ie. SB4) from the dropdown list (top left).
+       
+    	On Rancher web interface create a host in Kubernetes environment --> copy script to clipboard
+	
+	1. Run Kubernetes host sudo script on K8 instance
+	2. K8 is installed by Rancher. See host progress in Rancher - INFRASTRUCTURE - Hosts.
+	3. Monitor install progress by clicking on Kubernetes menu option. When you see >_CLI the K8 master is up
+
+Execute below command to setup ONAP Worker node ( repeat same command on other ONAP cluster node ):
+
+	sudo ansible-pull -U https://github.com/onap-ericsson/ONAP_Ericsson.git  deploy/onap_worker.yml -vvv
+
+Wait for the script to complete.
+
+
 
 
 Add Kubernetes Host
