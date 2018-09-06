@@ -108,7 +108,15 @@ Access Rancher server via web browser
 	Click “create”
 	Select the new named environment (ie. SB4) from the dropdown list (top left).
        
-    	On Rancher web interface create a host in Kubernetes environment --> copy script to clipboard
+Add Kubernetes Host
+
+	If this is the first (or only) host being added - click on the “Add a host” link
+	Click on “Save” (accept defaults) otherwise select INFRASTRUCTURE→ Hosts and click on “Add Host”
+	Enter the management IP for the k8s VM (e.g. 10.0.0.4) that was just created.
+	Click on “Copy to Clipboard” button
+	Click on “Close” button
+	
+	On Rancher web interface create a host in Kubernetes environment --> copy script to clipboard
 	
 	1. Run Kubernetes host sudo script on K8 instance
 	2. K8 is installed by Rancher. See host progress in Rancher - INFRASTRUCTURE - Hosts.
@@ -120,16 +128,6 @@ Execute below command to setup ONAP Worker node ( repeat same command on other O
 
 Wait for the script to complete.
 
-
-
-
-Add Kubernetes Host
-
-	If this is the first (or only) host being added - click on the “Add a host” link
-	Click on “Save” (accept defaults) otherwise select INFRASTRUCTURE→ Hosts and click on “Add Host”
-	Enter the management IP for the k8s VM (e.g. 10.0.0.4) that was just created.
-	Click on “Copy to Clipboard” button
-	Click on “Close” button
 
 Login to the new Kubernetes Host:
 
