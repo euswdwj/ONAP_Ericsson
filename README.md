@@ -35,7 +35,7 @@ pip install python-novaclient
    31  sudo pip install python-heatclient
    
 Clone the git:
-(no sudo) git clone https://github.com/onap-ericsson/ONAP_Ericsson.git 
+(no sudo) git clone https://github.com/euswdwj/ONAP_Ericsson.git 
 
 From Horizon GUI source the scripts. 
 nova list
@@ -48,7 +48,7 @@ Source your authentication credentials:
 Execute:
 
 	$ source keystonerc
-	$ git clone https://github.com/onap-ericsson/ONAP_Ericsson.git
+	$ git clone https://github.com/euswdwj/ONAP_Ericsson.git
   	$ cd ONAP_Ericsson/
 	
 
@@ -95,7 +95,7 @@ You can access by
 
 Execute below command to setup Rancher node:
 
-	sudo ansible-pull -U https://github.com/onap-ericsson/ONAP_Ericsson.git deploy/rancher.yml -vvv
+	sudo ansible-pull -U https://github.com/euswdwj/ONAP_Ericsson.git deploy/rancher.yml -vvv
 
 Execute below steps to create hosts using Rancher GUI:
 
@@ -124,7 +124,7 @@ Add Kubernetes Host
 
 Execute below command to setup ONAP Worker node ( repeat same command on other ONAP cluster node ):
 
-	sudo ansible-pull -U https://github.com/onap-ericsson/ONAP_Ericsson.git  deploy/onap_worker.yml -vvv
+	sudo ansible-pull -U https://github.com/euswdwj/ONAP_Ericsson.git  deploy/onap_worker.yml -vvv
 
 Wait for the script to complete.
 
@@ -192,7 +192,7 @@ It shows the status of Pods and Containers at Kubernetes level.
 
 Execute below command to setup onap on ANY ONE OF THE K8S node:
 
-	sudo ansible-pull -U https://github.com/onap-ericsson/ONAP_Ericsson.git deploy/onap.yml -vvv
+	sudo ansible-pull -U https://github.com/euswdwj/ONAP_Ericsson.git deploy/onap.yml -vvv
 
 ## To Remove
 
