@@ -51,7 +51,7 @@
 - name: Install docker for python
   pip:
     name: docker
-    
+
 - name: restart docker
   become: true
   systemd:
@@ -61,5 +61,5 @@
 
 
 
- 
+
 
